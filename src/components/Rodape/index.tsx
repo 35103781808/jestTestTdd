@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useListaParticipante } from '../../state/hook/useListaParticipante';
+import { useSorteador } from '../../state/hook/useSorteador';
 
 function Rodape() {
   const participantes: string[] = useListaParticipante();
 
   const navegarPara = useNavigate();
+  const sortear = useSorteador();
 
   const iniciar = () => {
+    sortear();
     navegarPara('/sorteio');
   };
   return (

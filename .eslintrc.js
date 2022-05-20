@@ -27,5 +27,6 @@ module.exports = {
     'no-unused-vars': 0,
     'object-curly-newline': 0,
     'consistent-return': 0,
+    'no-plusplus': 0,
   },
 };

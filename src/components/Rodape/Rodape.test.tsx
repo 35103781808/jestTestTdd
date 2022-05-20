@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { useListaParticipante } from '../../state/hook/useListaParticipante';
@@ -8,6 +8,9 @@ jest.mock('../../state/hook/useListaParticipante', () => ({ useListaParticipante
 const mockNavegacao = jest.fn();
 
 jest.mock('react-router-dom', () => ({ useNavigate: () => mockNavegacao }));
+
+const mockSorteio = jest.fn();
+jest.mock('../../state/hook/useSorteador', () => ({ useSorteador: () => mockSorteio }));
 
 describe('Quando não existe participantes suficientes', () => {
   beforeEach(() => { (useListaParticipante as jest.Mock).mockReturnValue([]); });
@@ -51,5 +54,6 @@ describe('Quando existe participantes suficientes', () => {
     fireEvent.click(button);
     expect(mockNavegacao).toHaveBeenCalledTimes(1);
     expect(mockNavegacao).toHaveBeenCalledWith('/sorteio');
+    expect(mockSorteio).toHaveBeenCalledTimes(1);
   });
 });
